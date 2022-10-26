@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="text-center">
+<h1> {{ vienas_projektas.pavadinimas }} </h1>
+</div>
+<br/>
+
+{% if vienas_projektas.nuotrauka %}
+<img src="{{ vienas_projektas.nuotrauka.url }}" style="width:'100%'" class="card-img-top" alt="...">
+{% else %}
+<img src="{% static 'img/no-image.png' %}" style="width:400px" class="card-img-top">
+{% endif %}
+<br/>
+<br/>
+<p>Pradžia: <strong> {{ vienas_projektas.pradzios_data }} </strong></p>
+<p>Pabaiga: <strong> {{ vienas_projektas.pabaigos_data }} </strong></p>
+<br/>
+<p> {{ vienas_projektas.aprasymas | safe }} </p>
+<br/>
+<p><strong>Darbuotojai:</strong>
+
+{% for darbuotojas in  darbuotojai %}
+<p> {{ darbuotojas }} </p>
+{% endfor %}
+
+<p><strong>Darbai:</strong>
+
+{% for darbas in  darbai %}
+<p>{{ darbas }} </p>
+{% endfor %}
+
+<p><strong>Sąskaita už darbus:</strong>
+
+<p>{{ vienas_projektas.saskaitos }} </p>
+
+{% endblock %}

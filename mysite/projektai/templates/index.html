@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Sveiki atvykę{% endblock %}
+
+{% block content %}
+<h1>Sveiki atvykę!</h1>
+
+<br/>
+<p>Šiuo metu pas mus yra:</p>
+<ul>
+    <li><strong>Projektų:</strong> {{ kiek_projektu }}</li>
+    <li><strong>Klientų:</strong> {{ kiek_klientu }}</li>
+    <li><strong>Darbuotojų:</strong> {{ kiek_darbuotoju }}</li>
+    <li><strong>Darbų:</strong> {{ kiek_darbu }}</li>
+</ul>
+{% endblock %}

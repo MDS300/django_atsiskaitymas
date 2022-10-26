@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} Priskirti projektai {% endblock %}
+
+{% block content %}
+{% load static %}
+<h1>Priskirti projektai</h1>
+{% if priskirti_projektai %}
+<ul>
+{% for projektas in priskirti_projektai %}
+{% if projektas.nuotrauka %}
+<img src="{{ projektas.nuotrauka.url }}" style="width:300px" class="card-img-top" alt="...">
+{% else %}
+<img src="{% static 'img/no-image.png' %}" style="width:300px" class="card-img-top">
+{% endif %}
+<p class="card-text"><a href="{% url 'projektas' projektas.id %}"> {{ projektas.pavadinimas }} </a></p>
+{% endfor %}
+</ul>
+
+{% else %}
+<p>Šiuo metu neturite priskirtų projektų.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Projektai{% endblock %}
+
+{% block content %}
+{% load static %}
+<h1>Projektai</h1>
+
+{% if visi_projektai %}
+    <div class="row">
+    {% for projektas in visi_projektai %}
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card mb-4 shadow-sm">
+                {% if projektas.nuotrauka %}
+                <img src="{{ projektas.nuotrauka.url }}" style="width:300px" class="card-img-top" alt="...">
+                {% else %}
+                <img src="{% static 'img/no-image.png' %}" style="width:300px" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <p class="card-text"><a href="{% url 'projektas' projektas.id %}"> {{ projektas.pavadinimas }} </a></p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+<p>Projektų nėra.</p>
+{% endif %}
+
+<div class="container puslapiai">
+    <nav aria-label="...">
+        {% if visi_projektai.has_other_pages %}
+            <ul class="pagination pagination-sm justify-content-end">
+                {% for i in visi_projektai.paginator.page_range %}
+                    {% if visi_projektai.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
+</div>
+
+{% endblock %}
